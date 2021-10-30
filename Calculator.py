@@ -3,7 +3,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 dot = False
-count = 0
 
 class Ui_MainWindow(object):
         def setupUi(self, MainWindow):
