@@ -233,7 +233,7 @@ class Ui_MainWindow(object):
         "border-radius: 35.5px;\n"
         "background: #a3e7d6")
                 self.ce.setObjectName("ce")
-                self.divide = QtWidgets.QPushButton(self.frame, clicked = lambda: self.press_it("÷"))
+                self.divide = QtWidgets.QPushButton(self.frame, clicked = lambda: self.press_it("/"))
                 self.divide.setGeometry(QtCore.QRect(240, 30, 75, 75))
                 palette = QtGui.QPalette()
                 brush = QtGui.QBrush(QtGui.QColor(68, 68, 68))
@@ -299,7 +299,7 @@ class Ui_MainWindow(object):
         "border-radius: 35.5px;\n"
         "background: #a3e7d6")
                 self.divide.setObjectName("divide")
-                self.times = QtWidgets.QPushButton(self.frame, clicked = lambda: self.press_it("×"))
+                self.times = QtWidgets.QPushButton(self.frame, clicked = lambda: self.press_it("*"))
                 self.times.setGeometry(QtCore.QRect(345, 30, 75, 75))
                 palette = QtGui.QPalette()
                 brush = QtGui.QBrush(QtGui.QColor(68, 68, 68))
@@ -906,7 +906,7 @@ class Ui_MainWindow(object):
         "\n"
         "")
                 self.six.setObjectName("six")
-                self.equal = QtWidgets.QPushButton(self.frame, clicked = lambda: self.press_it("="))
+                self.equal = QtWidgets.QPushButton(self.frame, clicked = lambda: self.math_it())
                 self.equal.setGeometry(QtCore.QRect(345, 344, 75, 181))
                 palette = QtGui.QPalette()
                 brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
@@ -1328,20 +1328,26 @@ class Ui_MainWindow(object):
                         dot = False
                 screen = screen[:-1]
                 self.outputlabel.setText(screen)
+        
+        def math_it(self):
+                screen = self.outputlabel.text()
+                try:
+                        answer = eval(screen)
+                        self.outputlabel.setText(str(answer))
+                except:
+                        self.outputlabel.setText("ERROR")
 
 
         def dot_it(self):
                 global dot
-        
-                screen=self.outputlabel.text()
-                if dot == False:
-                        screen = f'{screen}.'
-                        self.outputlabel.setText(screen)
-                        dot=True
-                elif dot == True:
-                        pass
-                else:
-                        pass
+                screen = self.outputlabel.text()
+                if "." not in screen:
+                        self.outputlabel.setText(f"{screen}.")
+                else: 
+                        if not screen[-1].isnumeric() or screen[-1] != "." :  
+                                        self.outputlabel.setText(f"{screen}.")
+                                        dot = True 
+                                                if dot = True:
                 
         def press_it(self, pressed):
                 global dot
