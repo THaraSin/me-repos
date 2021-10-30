@@ -3,6 +3,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 dot = False
+count = 0
 
 class Ui_MainWindow(object):
         def setupUi(self, MainWindow):
@@ -1339,26 +1340,27 @@ class Ui_MainWindow(object):
 
 
         def dot_it(self):
-                global dot
-                screen = self.outputlabel.text()
-                if "." not in screen:
-                        self.outputlabel.setText(f"{screen}.")
+                global dot  
+                screen = self.outputlabel.text()                
+                if dot == False:
+                        screen = f'{screen}.'
+                        self.outputlabel.setText(screen)
                         dot = True
-                else: 
-                        if dot == False:
-                                screen = f'{screen}.'
-                                self.outputLabel.setText(screen)
-                                dot = True
-                        elif dot == True:
-                                pass
-                        else:
-                                pass
+                elif dot == True:
+                        pass
+                else:
+                        pass
+                
+                        
                 
         def press_it(self, pressed):
                 global dot
                 screen = self.outputlabel.text()
                 if pressed == "c":
                         self.outputlabel.setText("0")
+                elif not pressed.isnumeric():
+                        dot = False
+                        self.outputlabel.setText(f'{self.outputlabel.text()}{pressed}')
                 else:
                         if self.outputlabel.text() == "0":
                                 self.outputlabel.setText("")
