@@ -333,11 +333,15 @@ class Ui_MainWindow(object):
                 global dot  
                 screen = self.outputlabel.text()                
                 if dot == False:
-                        screen = f'{screen}.'
-                        self.outputlabel.setText(screen)
-                        dot = True
+                        if not screen[-1].isnumeric():
+                                pass
+                        else:
+                                screen = f'{screen}.'
+                                self.outputlabel.setText(screen)
+                                dot = True
                 elif dot == True:
                         pass
+
                 else:
                         pass
                 
