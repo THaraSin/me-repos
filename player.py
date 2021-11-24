@@ -149,3 +149,4 @@ class Player(Entity):
     def input(self, key):
         if key == 'space':
             self.jump()
+        

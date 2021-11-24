@@ -10,7 +10,7 @@ AmbientLight(color = (100, 100, 100, 0.1))
 sky = Sky(texture = "./assets/Sky")
 
 normalJump = 0.3
-normalSpeed = 1.5 
+normalSpeed = 2
 
 player = Player("cube", (0, 10, 0), "box", controls ="wasd")
 player.jump_height = normalJump
