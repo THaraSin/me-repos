@@ -13,8 +13,9 @@ normalJump = 0.3
 normalSpeed = 1.5 
 
 player = Player("cube", (0, 10, 0), "box", controls ="wasd")
-player.jump.hight. normalJump
+player.jump_height = normalJump
 player.SPEED = normalSpeed
 
+ground = Entity(model = "cube", color = color.light_gray, collider = "box", scale = (100, 1, 100), texture = "white_cube")
 
 app.run()
