@@ -1,4 +1,4 @@
-form ursina import *
+from ursina import *
 
 class NormalBlok(Entity):
     def __init__(self, position = (0, 0, 0), rotation = (0, 0, 0)):
