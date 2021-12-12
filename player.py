@@ -1,30 +1,32 @@
 from ursina import *
 import math
 
-class Player(Entity):
-    def __init__(self, model, position, collider, scale=(1, 1, 1), SPEED=3, velocity=(0, 0, 0), MAXJUMP=1, gravity=1,controls = "wasd", **kwargs):
+class ThirdPersonController(Entity):
+    def __init__(self, model, position, collider, scale=(1, 1, 1), SPEED=3, velocity=(0, 0, 0), MAXJUMP=1, gravity=0.8,controls = "wasd", **kwargs):
 
-        super().__init__(model="cube", position=position,
-                         collider=collider, scale=(1.3, 1, 1.3), visible_self=False)
+        super().__init__(
+            model = "sphere", 
+            position = position,
+            scale = (1.3, 1, 1.3), 
+            texture = "white_cube",
+            tag = "player",
+            collider = "box"
+            )
+        self.collider = BoxCollider(self, center = Vec3(0, 1, 0), size = Vec3(1, 1, 1))
         mouse.locked = True
         camera.parent = self
-        camera.position = (0, 2, 0)
-        camera.rotation = (0, 0, 0)
-        camera.fov = 100
+        camera.position = (0, 2, -5)
+        camera.rotation = (10, 0, 0)
+        camera.fov = 80
         self.velocity_x, self.velocity_y, self.velocity_z = velocity
         self.SPEED = SPEED
         self.MAXJUMP = MAXJUMP
         self.jump_count = 0
         self.gravity = gravity
-        self.jump_height = 0.3
+        self.jump_height = 0.2
         self.slope = 40
         self.controls = controls
         self.sensibility = 70
-
-        self.time_running = False
-        self.count = 0.0
-        self.time = Text(text = str(round(self.count)), origin = (0, 0), size = 0.05, position = Vec2(-0.73, 0.44))
-        self.time.disable()
 
         for key, value in kwargs.items():
             try:
@@ -38,11 +40,6 @@ class Player(Entity):
             self.jump_count += 1
 
     def update(self):
-        if self.time_running:
-            self.time.enable()
-            self.count += time.dt
-            self.time.text = str(round(self.count))
-
         y_movement = self.velocity_y
 
         direction = (0, 1, 0)
