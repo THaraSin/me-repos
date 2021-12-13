@@ -49,17 +49,19 @@ class FinishMenu(Entity):
         self.main_menu = None
 
         def reset():
-            self.finish_menu.disable()
             self.player.position = (0, 5, 0)
             self.player.enable()
             mouse.locked = True
+            self.finish_menu.disable()
 
         def next_level():
-            while level01 and FinishMenu:
-                level02.enable() 
+            if Level01.enable:
                 level01.disable()
-                reset()
-                self.finish_menu.disable()
+                level02.enable()
+            self.player.position = (0, 5, 0)
+            self.player.enable()
+            mouse.locked = True
+            self.finish_menu.disable()
 
         nextlevel_button = Button(text = "Next Level", color = color.black, scale_y = 0.1, scale_x = 0.3, y = 0.12, parent = self.finish_menu)
         reset_button = Button(text = "R e s e t", color = color.black, scale_y = 0.1, scale_x = 0.3, y = 0, parent = self.finish_menu)
@@ -102,9 +104,15 @@ def update():
     
     
     if hit.entity == level01.finishBlock_1:
-        player.disable()
-        f = FinishMenu()
-        mouse.locked = False
+        if count <1:
+            player.disable()
+            Level01.disable
+            mouse.locked = False
+            f = FinishMenu()
+            f.player = player
+            count += 1
+        else:
+            pass
         
 
 app.run()
