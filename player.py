@@ -1,6 +1,6 @@
 from ursina import *
 import math
-
+jump_count = 0
 class ThirdPersonController(Entity):
     def __init__(self, model, position, collider, scale=(1, 1, 1), SPEED=3, velocity=(0, 0, 0), MAXJUMP=1, gravity=0.8,controls = "wasd", **kwargs):
 
@@ -15,7 +15,7 @@ class ThirdPersonController(Entity):
         self.collider = BoxCollider(self, center = Vec3(0, 1, 0), size = Vec3(1, 1, 1))
         mouse.locked = True
         camera.parent = self
-        camera.position = (0, 2, -5)
+        camera.position = (0, 2, -8)
         camera.rotation = (10, 0, 0)
         camera.fov = 80
         self.velocity_x, self.velocity_y, self.velocity_z = velocity
@@ -40,6 +40,7 @@ class ThirdPersonController(Entity):
             self.jump_count += 1
 
     def update(self):
+        global jump_count
         y_movement = self.velocity_y
 
         direction = (0, 1, 0)
@@ -62,6 +63,7 @@ class ThirdPersonController(Entity):
             if yRay.hit:
                 move = False
                 self.jump_count = 0
+                jump_count = 0
 
             if move:
                 self.y += y_movement
@@ -144,6 +146,11 @@ class ThirdPersonController(Entity):
         camera.rotation_x = min(max(-80,camera.rotation_x),80)
 
     def input(self, key):
+        global jump_count
         if key == 'space':
             self.jump()
-        
+            if jump_count < 1:
+                Audio("./assets/Mario.wav", loop = False, volume = 0.25)
+                jump_count += 1
+            else:
+                pass

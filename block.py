@@ -5,7 +5,7 @@ class NormalBlock(Entity):
         super().__init__(
             model = "cube",
             scale = Vec3(3, 0.8, 3),
-            color = "#AFFF3C",
+            color = "#C0C0C0",
             collider = "box",
             texture = "white_cube",
             position = position,
@@ -28,7 +28,7 @@ class SpeedBlock(Entity):
         super().__init__(
             model = "cube",
             scale = scale,
-            color = "#53FFF5",
+            color = "#9370DB",
             collider = "box",
             texture = "white_cube",
             position = position,
@@ -75,7 +75,7 @@ class EndBlock(Entity):
             model = "cube",
             scale_x = 10,
             scale_z = 10,
-            color = "#CACACA",
+            color = "#AFFF3C",
             collider = "box",
             texture = "white_cube",
             position = position,
