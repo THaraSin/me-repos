@@ -20,7 +20,7 @@ class Level02(Entity):
         self.block_2_8 = NormalBlock((32, 10, 36))
         self.block_2_9 = SpeedBlock((32, 10, 46))
 
-        self.ground_2 = StartBlock()
+        self.ground_2 = StartBlock((0, -0.01, 0))
         self.finishBlock_2 = EndBlock((32, 10, 82))
 
         self.player = None
@@ -31,49 +31,41 @@ class Level02(Entity):
         self.player.SPEED = normalSpeed
 
     def disable(self):
-       self.block_2_1.disable()
-       self.block_2_2.disable()
-       self.block_2_3.disable()
-       self.block_2_4.disable()
-       self.block_2_5.disable()
-       self.block_2_6.disable()
-       self.block_2_7.disable()
-       self.block_2_8.disable()
-       self.block_2_9.disable()
-       self.finishBlock_2.disable()
-       self.ground_2.disable()
+        self.is_enabled = False
+
+        self.block_2_1.disable()
+        self.block_2_2.disable()
+        self.block_2_3.disable()
+        self.block_2_4.disable()
+        self.block_2_5.disable()
+        self.block_2_6.disable()
+        self.block_2_7.disable()
+        self.block_2_8.disable()
+        self.block_2_9.disable()
+        self.finishBlock_2.disable()
+        self.ground_2.disable()
 
     def enable(self):
-       self.block_2_1.enable()
-       self.block_2_2.enable()
-       self.block_2_3.enable()
-       self.block_2_4.enable()
-       self.block_2_5.enable()
-       self.block_2_6.enable()
-       self.block_2_7.enable()
-       self.block_2_8.enable()
-       self.block_2_9.enable()
-       self.finishBlock_2.enable()
-       self.ground_2.enable()
+        self.is_enabled = True
+
+        self.block_2_1.enable()
+        self.block_2_2.enable()
+        self.block_2_3.enable()
+        self.block_2_4.enable()
+        self.block_2_5.enable()
+        self.block_2_6.enable()
+        self.block_2_7.enable()
+        self.block_2_8.enable()
+        self.block_2_9.enable()
+        self.finishBlock_2.enable()
+        self.ground_2.enable()
 
     def update(self):
-        
-        if self.player.position.y <= -50:
-            self.player.position = Vec3(0, 5, 0)
-            self.player.SPEED = normalSpeed
-            self.player.jump_height = normalJump
-            camera.rotation = (0, 0, 0)
-
-        if held_keys["g"]:
-            self.player.position = Vec3(0, 5, 0)
-            self.player.SPEED = normalSpeed
-            self.player.jump_height = normalJump
-            camera.rotation = (0, 0, 0)
-
-        
         hit = raycast(self.player.position, self.player.down, distance = 2, ignore = [self.player, ])
         
         if self.ground_2.enabled == True:
+            if hit.entity == self.ground_2:
+                self.player.SPEED = normalSpeed
             if hit.entity == self.block_2_7:
                 self.player.jump_height = 0.4
             elif hit.entity != self.block_2_7:
@@ -81,10 +73,10 @@ class Level02(Entity):
 
             if hit.entity == self.block_2_9:
                 self.player.SPEED = boostSpeed * 2.5
-                invoke(self.speed, delay=2.5)
 
             if hit.entity == self.finishBlock_2:
                 global count
+                self.player.SPEED = normalSpeed
                 if count < 1:
                     Audio("./assets/Victory sound effect.wav", loop = False, volume = 3)
                     count += 1

@@ -149,8 +149,8 @@ class ThirdPersonController(Entity):
         global jump_count
         if key == 'space':
             self.jump()
-            if jump_count < 1:
-                Audio("./assets/Mario.wav", loop = False, volume = 0.25)
+            '''if jump_count < 1:
+                Audio("./assets/Mario.wav", loop = False, volume = 0.15)
                 jump_count += 1
             else:
-                pass
+                pass'''

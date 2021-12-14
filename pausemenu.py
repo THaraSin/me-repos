@@ -5,8 +5,8 @@ class PauseMenu(Entity):
         super().__init__(parent = camera.ui, ignore_paused = True)
 
         self.pause_menu = Entity(parent = self, enabled = True)
+        self.main_menu = Entity(parent = self, enabled = False)
         self.player = None
-        self.main_menu = None
 
         def reset():
             self.pause_menu.disable()
@@ -18,10 +18,13 @@ class PauseMenu(Entity):
             self.player.enable()
             mouse.locked = True
             self.pause_menu.disable()
-
-        resume_button = Button(text = "R e s u m e", color = color.black, scale_y = 0.1, scale_x = 0.3, y = 0.12, parent = self.pause_menu)
-        reset_button = Button(text = "R e s e t", color = color.black, scale_y = 0.1, scale_x = 0.3, y = 0, parent = self.pause_menu)
-        quit_button = Button(text = "Q u i t", color = color.black, scale_y = 0.1, scale_x = 0.3, y = -0.12, parent = self.pause_menu)
+        
+        resume_button = Button(text = "R e s u m e", color = color.black, scale_y = 0.1, scale_x = 0.3, y = 0.2, parent = self.pause_menu)
+        reset_button = Button(text = "R e s e t", color = color.black, scale_y = 0.1, scale_x = 0.3, y = 0., parent = self.pause_menu)
+        quit_button = Button(text = "Q u i t", color = color.black, scale_y = 0.1, scale_x = 0.3, y = -0.2, parent = self.pause_menu)
+        
+        
         quit_button.on_click = application.quit
         reset_button.on_click = Func(reset)
         resume_button.on_click = Func(resume)
+  

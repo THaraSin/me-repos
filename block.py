@@ -12,23 +12,23 @@ class NormalBlock(Entity):
             rotation = rotation,
         )
         
-class JumpBlock(Entity):
-    def __init__(self, position = (0, 0, 0)):
-        super().__init__(
-            model = "cube",
-            scale = Vec3(3, 0.8, 3),
-            color = "#FF8B00",
-            collider = "box",
-            texture = "white_cube",
-            position = position,
-        )
-
 class SpeedBlock(Entity):
     def __init__(self, position = (0, 0, 0), scale = (3, 0.5, 8)):
         super().__init__(
             model = "cube",
             scale = scale,
             color = "#9370DB",
+            collider = "box",
+            texture = "white_cube",
+            position = position,
+        )
+
+class JumpBlock(Entity):
+    def __init__(self, position = (0, 0, 0)):
+        super().__init__(
+            model = "cube",
+            scale = Vec3(3, 0.8, 3),
+            color = "#FF8B00",
             collider = "box",
             texture = "white_cube",
             position = position,
