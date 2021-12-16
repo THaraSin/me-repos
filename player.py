@@ -1,4 +1,5 @@
 from ursina import *
+from Sky import *
 import math
 jump_count = 0
 class ThirdPersonController(Entity):
@@ -16,7 +17,7 @@ class ThirdPersonController(Entity):
         mouse.locked = True
         camera.parent = self
         camera.position = (0, 2, -8)
-        camera.rotation = (10, 0, 0)
+        camera.rotation = (0, 0, 0)
         camera.fov = 80
         self.velocity_x, self.velocity_y, self.velocity_z = velocity
         self.SPEED = SPEED
@@ -27,6 +28,8 @@ class ThirdPersonController(Entity):
         self.slope = 40
         self.controls = controls
         self.sensibility = 70
+
+        self.mar = None
 
         for key, value in kwargs.items():
             try:
@@ -149,8 +152,8 @@ class ThirdPersonController(Entity):
         global jump_count
         if key == 'space':
             self.jump()
-            '''if jump_count < 1:
-                Audio("./assets/Mario.wav", loop = False, volume = 0.15)
+            if jump_count < 1:
+                Audio(sound_file_name = "./assets/Mario.wav", volume = 0.1, auto_play = True, loop = False)
                 jump_count += 1
             else:
-                pass'''
+                pass

@@ -1,5 +1,4 @@
 from ursina import *
-import sys
 from block import *
 
 count = 0
@@ -17,11 +16,11 @@ class Level02(Entity):
         self.block_2_5 = NormalBlock((8, 5, 36))
         self.block_2_6 = NormalBlock((16, 6, 36))
         self.block_2_7 = JumpBlock((24, 2, 36))
-        self.block_2_8 = NormalBlock((32, 10, 36))
-        self.block_2_9 = SpeedBlock((32, 10, 46))
+        self.block_2_8 = NormalBlock((32, 14, 36))
+        self.block_2_9 = SpeedBlock((32, 14, 46))
 
         self.ground_2 = StartBlock((0, -0.01, 0))
-        self.finishBlock_2 = EndBlock((32, 10, 82))
+        self.finishBlock_2 = EndBlock(position =(32, 15, 82))
 
         self.player = None
 
@@ -67,7 +66,7 @@ class Level02(Entity):
             if hit.entity == self.ground_2:
                 self.player.SPEED = normalSpeed
             if hit.entity == self.block_2_7:
-                self.player.jump_height = 0.4
+                self.player.jump_height = 0.5
             elif hit.entity != self.block_2_7:
                 self.player.jump_height = normalJump
 
@@ -75,13 +74,7 @@ class Level02(Entity):
                 self.player.SPEED = boostSpeed * 2.5
 
             if hit.entity == self.finishBlock_2:
-                global count
                 self.player.SPEED = normalSpeed
-                if count < 1:
-                    Audio("./assets/Victory sound effect.wav", loop = False, volume = 3)
-                    count += 1
-                else:
-                    pass
-                pass
+                
                 
                 
